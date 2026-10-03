@@ -325,15 +325,37 @@ DECLARE
   reg public.pos_registers%ROWTYPE;
   loc public.pos_locations%ROWTYPE;
   dev public.pos_devices%ROWTYPE;
+  v_claims jsonb;
+  v_actor_id text;
+  v_organization_id text;
+  v_register_id text;
+  v_location_ids text[];
 BEGIN
   SELECT * INTO STRICT initial_register FROM public.pos_registers WHERE id = p_register_id;
   IF current_setting('role', true) = 'authenticated' THEN
-    IF auth.uid() IS NULL OR public.pos_current_actor_id() IS NULL
-       OR public.pos_current_organization_id() IS DISTINCT FROM initial_register.organization_id
-       OR NOT COALESCE(initial_register.location_id = ANY (public.pos_current_location_ids()), false)
-       OR NOT public.pos_has_location_assignment(initial_register.organization_id, initial_register.location_id, public.pos_current_actor_id())
-       OR NOT public.pos_has_register_assignment(p_register_id, public.pos_current_actor_id())
-       OR (public.pos_current_register_id() IS NOT NULL AND public.pos_current_register_id() IS DISTINCT FROM p_register_id) THEN
+    -- Use the canonical claims source directly. Legacy SQL convenience helpers
+    -- reference unqualified functions/tables and cannot run under this empty
+    -- definer search_path; keep every privileged relation schema-qualified.
+    v_claims := public.pos_jwt_claims();
+    v_actor_id := v_claims->'app_metadata'->>'actor_id';
+    v_organization_id := v_claims->'app_metadata'->>'organization_id';
+    v_register_id := v_claims->'app_metadata'->>'register_id';
+    SELECT COALESCE(ARRAY(
+      SELECT jsonb_array_elements_text(COALESCE(v_claims->'app_metadata'->'location_ids', '[]'::jsonb))
+    ), ARRAY[]::text[]) INTO v_location_ids;
+    IF auth.uid() IS NULL OR v_actor_id IS NULL
+       OR v_organization_id IS DISTINCT FROM initial_register.organization_id
+       OR NOT COALESCE(initial_register.location_id = ANY (v_location_ids), false)
+       OR NOT EXISTS (
+         SELECT 1 FROM public.pos_staff_location_assignments s
+         WHERE s.organization_id = initial_register.organization_id
+           AND s.location_id = initial_register.location_id AND s.actor_id = v_actor_id
+       )
+       OR NOT EXISTS (
+         SELECT 1 FROM public.pos_staff_register_assignments s
+         WHERE s.register_id = p_register_id AND s.actor_id = v_actor_id
+       )
+       OR (v_register_id IS NOT NULL AND v_register_id IS DISTINCT FROM p_register_id) THEN
       RAISE EXCEPTION 'actor is not authorized' USING ERRCODE = '42501';
     END IF;
   ELSIF current_setting('role', true) NOT IN ('service_role', 'postgres', 'supabase_admin', 'none') THEN
