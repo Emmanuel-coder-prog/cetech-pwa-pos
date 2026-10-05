@@ -13,6 +13,8 @@ This candidate preserves the incumbent hybrid: local catalog/drafts, Supabase PO
 
 These manifests were recorded before product edits and frozen separately for actual-diff validation. They are a manual bounded substitute for unimplemented general #104 enforcement, not an implementation of #104.
 
+- [CI receipt alert locator](scope-ci-alert-locator-01.json): narrow an ambiguous existing error assertion to its intended receipt-unavailable alert; no receipt runtime change.
+
 ## Baseline evidence and limits
 
 The Phase-1 actual mounted Sell component diagnostic accepted two distinct scan events before local lookups settled and added only the second product: one line/revision1 instead of two/revision2. This is a correctness defect, not a latency measurement.
@@ -35,7 +37,7 @@ Revert only the bounded candidate source commits to the compatible tester base. 
 
 | Field | Evidence |
 |---|---|
-| Scope | Three bounded fixes plus connected test/staff-documentation maintenance; 18 allowed paths |
+| Scope | Three bounded fixes plus connected test/staff-documentation maintenance; 20 allowed paths |
 | Base SHA | `816e0bb6963aff760609a3c7e4817e603c4ffdf0` |
 | Local production-source checkpoint | `e9c92379` (register, browser and scanner imports); final documentation/test-maintenance tree recorded in the published PR |
 | Final remote SHA | Record exact published head in PR; no self-referential commit hash is embedded here |
@@ -62,3 +64,5 @@ Revert only the bounded candidate source commits to the compatible tester base. 
 
 The final publication/freshness report records the exact source SHA, CI result and two-pass cutoff. Source and local fixtures establish a review candidate, not production qualification. Current verdict remains **NOT READY FOR PRODUCTION**.
 
+
+Exact initial candidate7addddf3 CI37357308535 passed Windows and allLinuxgates except an existing receipt test locator (76/77 browserpassed). Bothrole=alert nodes were visible to the generic locator: businesserror andNext announcer. The test-only followup is scoped separately; it keeps error visibility and scope-denial controls assertions. Final remote head/CI followup belong in the external PR handoff.
