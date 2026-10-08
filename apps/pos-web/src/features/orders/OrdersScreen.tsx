@@ -121,6 +121,16 @@ export function OrdersScreen({
     });
   }, [orders, query, status]);
 
+  const summary = useMemo(
+  () => ({
+    total: orders.length,
+    completed: orders.filter((order) => order.status === "completed").length,
+    pending: orders.filter((order) => order.status === "payment_pending").length,
+    attention: orders.filter((order) => order.status === "needs_attention").length,
+  }),
+  [orders],
+);
+
   const unavailable = state === "error";
 
   return (
@@ -135,6 +145,28 @@ export function OrdersScreen({
             New sale
           </button>
         ) : null}
+      </div>
+*Emma UI customization*
+      <div className="orders-summary" aria-label="Order summary">
+        <div className="card orders-summary-card">
+          <span>Total orders</span>
+          <strong>{summary.total}</strong>
+        </div>
+
+        <div className="card orders-summary-card">
+          <span>Completed</span>
+          <strong>{summary.completed}</strong>
+        </div>
+
+        <div className="card orders-summary-card">
+          <span>Pending</span>
+          <strong>{summary.pending}</strong>
+        </div>
+
+        <div className="card orders-summary-card">
+          <span>Needs review</span>
+          <strong>{summary.attention}</strong>
+        </div>
       </div>
 
       {actionMessage ? <div className="banner success workspace-banner" role="status">{actionMessage}</div> : null}

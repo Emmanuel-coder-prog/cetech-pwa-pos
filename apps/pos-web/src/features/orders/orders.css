@@ -65,3 +65,63 @@
   .order-detail-line { flex-wrap: wrap; gap: var(--space-1); }
   .order-detail-line > strong { margin-left: auto; }
 }
+
+/* Emmanuel UI customization — order overview */
+
+.orders-summary {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.orders-summary-card {
+  min-width: 0;
+  padding: 18px;
+  border-radius: 16px;
+  background:
+    linear-gradient(
+      145deg,
+      color-mix(in srgb, var(--color-surface) 96%, var(--color-primary)),
+      var(--color-surface)
+    );
+  box-shadow: 0 6px 20px rgb(15 23 42 / 5%);
+}
+
+.orders-summary-card span {
+  display: block;
+  color: var(--color-text-muted);
+  font-size: 12px;
+  font-weight: 650;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.orders-summary-card strong {
+  display: block;
+  margin-top: 8px;
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+
+@media (max-width: 900px) {
+  .orders-summary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .orders-summary {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .orders-summary-card {
+    padding: 14px;
+  }
+
+  .orders-summary-card strong {
+    font-size: 23px;
+  }
+}
