@@ -398,3 +398,96 @@
     transition: none;
   }
 }
+
+/* Emmanuel UI customization — desktop POS shell */
+
+@media (min-width: 821px) {
+  :root {
+    --sidebar: 104px;
+  }
+
+  .app-shell {
+    background:
+      radial-gradient(circle at 18% 0%, color-mix(in srgb, var(--color-primary) 8%, transparent), transparent 28%),
+      var(--color-bg);
+  }
+
+  .sidebar {
+    padding: 18px 12px 14px;
+    background:
+      linear-gradient(
+        180deg,
+        color-mix(in srgb, var(--color-surface) 94%, var(--color-primary)),
+        var(--color-surface)
+      );
+    border-right-color: color-mix(in srgb, var(--color-border) 78%, var(--color-primary));
+  }
+
+  .brand-mark {
+    width: 58px;
+    height: 58px;
+    border-radius: 18px;
+    margin-bottom: 28px;
+    font-size: 17px;
+    background: linear-gradient(145deg, #2563eb, #1d4ed8);
+    box-shadow: 0 12px 26px rgb(37 99 235 / 24%);
+  }
+
+  .nav-list {
+    gap: 8px;
+  }
+
+  .nav-btn {
+    min-height: 68px;
+    border: 1px solid transparent;
+    border-radius: 16px;
+    font-size: 11px;
+  }
+
+  .nav-btn:hover {
+    border-color: var(--color-border);
+    background: var(--color-surface-2);
+  }
+
+  .nav-btn.active {
+    border-color: color-mix(in srgb, var(--color-primary) 22%, transparent);
+    background:
+      linear-gradient(
+        145deg,
+        color-mix(in srgb, var(--color-primary) 22%, var(--color-surface)),
+        var(--color-primary-soft)
+      );
+    box-shadow: 0 8px 20px rgb(15 23 42 / 10%);
+  }
+
+  .topbar {
+    min-height: 72px;
+    padding: 10px 22px;
+    background: color-mix(in srgb, var(--color-surface) 92%, transparent);
+    backdrop-filter: blur(14px);
+    border-bottom-color: color-mix(in srgb, var(--color-border) 78%, var(--color-primary));
+  }
+
+  .app-title {
+    font-size: 17px;
+    font-weight: 800;
+  }
+
+  .context-pill,
+  .status-pill {
+    min-height: 30px;
+    border-radius: 999px;
+    padding: 6px 10px;
+  }
+
+  .topbar .btn.small {
+    border-radius: 12px;
+    padding-inline: 15px;
+  }
+
+  .content {
+    padding: 22px;
+  }
+}
+
+

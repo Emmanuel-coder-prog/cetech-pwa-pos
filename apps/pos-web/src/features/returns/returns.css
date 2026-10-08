@@ -43,3 +43,33 @@
   .returns-sale-card > .btn, .return-flow .dialog-actions > .btn { width: 100%; }
   .returns-screen .banner { flex-wrap: wrap; }
 }
+
+
+/* Emmanuel UI customization */
+
+.returns-search {
+  padding: 18px;
+  border-radius: 18px;
+}
+
+.returns-sale-card {
+  padding: 20px;
+  border-radius: 18px;
+  box-shadow: 0 6px 22px rgb(15 23 42 / 5%);
+  transition:
+    transform 140ms ease,
+    border-color 140ms ease,
+    box-shadow 140ms ease;
+}
+
+.returns-sale-card:hover {
+  transform: translateY(-2px);
+  border-color:
+    color-mix(in srgb, var(--color-primary) 50%, var(--color-border));
+  box-shadow: 0 12px 28px rgb(15 23 42 / 10%);
+}
+
+.returns-sale-total {
+  font-size: 18px !important;
+  font-weight: 750;
+}

@@ -29,3 +29,33 @@
 @media (max-width: 480px) {
   .register-current > .btn { width: 100%; }
 }
+
+/* Emmanuel UI customization */
+
+.register-screen {
+  max-width: 1100px;
+}
+
+.register-current,
+.register-report,
+.register-open,
+.register-close {
+  border-radius: 18px;
+}
+
+.register-current {
+  padding: 22px;
+  box-shadow: 0 8px 28px rgb(15 23 42 / 6%);
+}
+
+.register-report-value {
+  padding: 16px 18px;
+  border-radius: 12px;
+  font-size: 17px;
+  background:
+    linear-gradient(
+      135deg,
+      var(--color-surface-2),
+      color-mix(in srgb, var(--color-surface-2) 92%, var(--color-primary))
+    );
+}

@@ -122,14 +122,82 @@ export function LoginScreen({
   }
 
   return (
-    <main className="auth-screen" id="main-content">
-      <section className="card auth-card" aria-labelledby="login-title">
-        <div className="auth-logo" aria-hidden="true">
-          CT
+  <main className="auth-screen" id="main-content">
+    <section className="auth-shell" aria-labelledby="login-title">
+      <aside className="auth-brand-panel">
+        <div className="auth-brand-top">
+          <div className="auth-logo" aria-hidden="true">
+            CT
+          </div>
+
+          <div>
+            <div className="auth-brand-name">CETECH</div>
+            <div className="auth-brand-product">Point of Sale</div>
+          </div>
         </div>
+
+        <div className="auth-brand-content">
+          <span className="auth-brand-kicker">Retail workspace</span>
+
+          <h2>
+            Everything your counter needs,
+            <span> in one focused workspace.</span>
+          </h2>
+
+          <p>
+            Built for quick product lookup, customer service, checkout,
+            receipts and daily register operations.
+          </p>
+
+          <div className="auth-benefits">
+            <div className="auth-benefit">
+              <span className="auth-benefit-icon">01</span>
+              <div>
+                <strong>Fast selling</strong>
+                <small>Search, scan and build customer orders quickly.</small>
+              </div>
+            </div>
+
+            <div className="auth-benefit">
+              <span className="auth-benefit-icon">02</span>
+              <div>
+                <strong>Register aware</strong>
+                <small>Your assigned register and shift stay connected to your session.</small>
+              </div>
+            </div>
+
+            <div className="auth-benefit">
+              <span className="auth-benefit-icon">03</span>
+              <div>
+                <strong>Resilient workflow</strong>
+                <small>Saved work and recovery tools help protect unfinished transactions.</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="auth-brand-footer">
+          <span className="auth-brand-dot" />
+          CETECH retail operations
+        </div>
+      </aside>
+
+      <section className="card auth-card">
+        <div className="auth-mobile-brand">
+          <div className="auth-logo" aria-hidden="true">
+            CT
+          </div>
+          <strong>CETECH POS</strong>
+        </div>
+
         <div className="eyebrow">Staff sign-in</div>
-        <h1 id="login-title">CETECH POS</h1>
-        <p className="subtle">Scan → Sell → Pay → Print</p>
+
+        <h1 id="login-title">Welcome back</h1>
+
+        <p className="subtle">
+          Sign in with your staff account to access the point of sale.
+        </p>
+
         {notice ? (
           <div className={`banner ${notice.tone}`} role="status">
             <div>
@@ -138,17 +206,22 @@ export function LoginScreen({
             </div>
           </div>
         ) : null}
+
         {supportReference ? (
-          <p className="muted" data-support-reference="">Reference {supportReference}</p>
+          <p className="auth-reference muted" data-support-reference="">
+            Support reference: {supportReference}
+          </p>
         ) : null}
+
         {errorMessage ? (
           <div className="banner danger" role="alert">
             {errorMessage}
           </div>
         ) : null}
+
         <form className="auth-actions stack" onSubmit={handleSubmit}>
           <label className="field">
-            <span>Email</span>
+            <span>Email address</span>
             <input
               className="input"
               type="email"
@@ -157,13 +230,16 @@ export function LoginScreen({
               autoCapitalize="none"
               spellCheck={false}
               inputMode="email"
+              placeholder="you@cetech.com"
               value={email}
               disabled={loading}
               onChange={(event) => setEmail(event.target.value)}
             />
           </label>
+
           <div className="field">
             <label htmlFor="staff-password">Password</label>
+
             <span className="auth-password-control">
               <input
                 className="input"
@@ -171,10 +247,12 @@ export function LoginScreen({
                 type={passwordVisible ? "text" : "password"}
                 name="staff-password"
                 autoComplete="current-password"
+                placeholder="Enter your password"
                 value={password}
                 disabled={loading}
                 onChange={(event) => setPassword(event.target.value)}
               />
+
               <button
                 className="auth-password-toggle"
                 type="button"
@@ -187,19 +265,29 @@ export function LoginScreen({
               </button>
             </span>
           </div>
+
           <button
-            className="btn primary block"
+            className="btn primary block auth-submit"
             type="submit"
             disabled={loading || !onSignIn}
             aria-busy={loading}
           >
-            {loading ? "Signing in…" : "Sign in"}
+            {loading ? "Signing in…" : "Sign in to POS"}
           </button>
         </form>
-        <p className="muted">
-          Use your staff account to continue.
-        </p>
+
+        <div className="auth-form-footer">
+          <span className="auth-secure-mark" aria-hidden="true">
+            ✓
+          </span>
+
+          <p>
+            Secure staff access
+            <small>Scan → Sell → Pay → Print</small>
+          </p>
+        </div>
       </section>
-    </main>
-  );
+    </section>
+  </main>
+);
 }

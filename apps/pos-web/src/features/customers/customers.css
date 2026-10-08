@@ -18,3 +18,35 @@
   .customer-card-heading { flex-wrap: wrap; }
   .customer-card > .btn { width: 100%; }
 }
+
+
+/* Emmanuel UI customization */
+
+.customer-card {
+  min-height: 190px;
+  padding: 20px;
+  border-radius: 18px;
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--color-surface) 98%, var(--color-primary)),
+      var(--color-surface)
+    );
+  box-shadow: 0 6px 22px rgb(15 23 42 / 5%);
+  transition:
+    transform 140ms ease,
+    border-color 140ms ease,
+    box-shadow 140ms ease;
+}
+
+.customer-card:hover {
+  transform: translateY(-2px);
+  border-color:
+    color-mix(in srgb, var(--color-primary) 50%, var(--color-border));
+  box-shadow: 0 12px 28px rgb(15 23 42 / 10%);
+}
+
+.customer-card-identity > strong {
+  font-size: 17px;
+  font-weight: 720;
+}
